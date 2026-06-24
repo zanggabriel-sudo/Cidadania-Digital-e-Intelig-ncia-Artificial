@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidadania Digital e IA - Conscientização contra Deepfakes</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-principal: #080c14;
+            --bg-card: #0f192a;
+            --azul-neon: #00f0ff;
+            --vermelho-alerta: #ff2a5f;
+            --texto-claro: #f8fafc;
+            --texto-mutado: #cbd5e1;
+            --cinza-linha: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-principal);
+            color: var(--texto-claro);
+            line-height: 1.8;
+            overflow-x: hidden;
+            font-size: 1.15rem;
+        }
+
+        /* --- MENU SUPERIOR --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 12, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--cinza-linha);
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--azul-neon), var(--vermelho-alerta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--cinza-linha);
+            color: var(--texto-claro);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            border-color: var(--azul-neon);
+            color: var(--azul-neon);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        /* --- CONTAINER DE CONTEÚDO --- */
+        main {
+            margin-top: 100px;
+            padding: 2rem;
+            min-height: calc(100vh - 100px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page-content {
+            width: 100%;
+            max-width: 1000px;
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 2.8rem; 
+            margin-bottom: 2rem;
+            color: var(--azul-neon);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--azul-neon);
+        }
+
+        p {
+            color: var(--texto-mutado);
+            margin-bottom: 1.8rem;
+            font-size: 1.2rem;
+        }
+
+        .introducao-aba {
+            font-size: 1.3rem;
+            color: #ffffff;
+            border-left: 4px solid var(--vermelho-alerta);
+            padding-left: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- ESTILIZAÇÃO DOS ELEMENTOS INTERNOS --- */
+        .grid-midia {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-midia { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 1rem; text-align: center; }
+            h2 { font-size: 2rem; }
+            main { margin-top: 160px; }
+        }
+
+        .media-placeholder {
+            background: var(--bg-card);
+            border: 1px solid var(--cinza-linha);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 320px;
+        }
+
+        .video-box {
+            width: 100%;
+            height: 220px;
+            background: #060a12;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--azul-neon);
+            margin-top: 1.5rem;
+            color: var(--azul-neon);
+            font-size: 1.1rem;
+            overflow: hidden;
+        }
+
+        .midia-imagem {
+            width: 100%;
+            max-height: 240px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            background: #060a12;
+        }
+
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .artigo-card {
+            background: linear-gradient(135deg, var(--bg-card), #142238);
+            border-left: 4px solid var(--azul-neon);
+            padding: 2rem;
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 2rem;
+        }
+
+        .citacao {
+            font-style: italic;
+            color: var(--texto-claro);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .fonte-artigo {
+            font-size: 1rem;
+            color: var(--azul-neon);
+            font-weight: bold;
+        }
+
+        /* --- SESSÃO DO QUESTIONÁRIO --- */
+        .quiz-container {
+            background: #060a12;
+            border: 1px solid var(--cinza-linha);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-container h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .quiz-opcao {
+            background: var(--bg-card);
+            border: 1px solid var(--cinza-linha);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+        }
+
+        .quiz-opcao:hover {
+            border-color: var(--azul-neon);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        /* --- SEÇÃO DA INTELIGÊNCIA ARTIFICIAL --- */
+        .ia-section {
+            background: rgba(15, 25, 42, 0.5);
+            border: 1px solid var(--azul-neon);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+        }
+
+        .ia-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ia-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--azul-neon), var(--vermelho-alerta));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--bg-principal);
+            box-shadow: 0 0 10px var(--azul-neon);
+            font-size: 1.2rem;
+        }
+
+        .ia-chat-box {
+            background: #060a12;
+            border-radius: 12px;
+            padding: 1.8rem;
+            min-height: 120px;
+            border: 1px solid var(--cinza-linha);
+        }
+
+        .ia-chat-box p {
+            font-size: 1.2rem;
+        }
+
+        .ia-btn {
+            background: linear-gradient(90deg, var(--azul-neon), var(--vermelho-alerta));
+            color: #ffffff;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .ia-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 42, 95, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">CIDADANIA DIGITAL 2026</div>
+        <nav>
+            <button class="nav-btn active" onclick="mudarPagina('deepfakes')">Ameaça das Deepfakes</button>
+            <button class="nav-btn" onclick="mudarPagina('desinformacao')">Desinformação em Massa</button>
+            <button class="nav-btn" onclick="mudarPagina('combate')">Guia de Combate</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <div id="deepfakes" class="page-content active">
+            <h2>O Impacto das Deepfakes</h2>
+            <p class="introducao-aba">Arquivos de vídeo, áudio e imagem adulterados de forma hiper-realista por Inteligência Artificial confundem a percepção pública do que é real.</p>
+            
+            <p>As deepfakes representam a evolução tecnológica da adulteração midiática. Utilizando algoritmos de aprendizado profundo (Deep Learning), softwares conseguem mapear rostos e sintetizar vozes com precisão assustadora, colocando palavras na boca de autoridades, celebridades e cidadãos comuns que eles jamais disseram.</p>
+            
+            <p>Esse fenômeno gera profundas crises éticas e democráticas. A manipulação visual não é mais um privilégio de estúdios de cinema de Hollywood; hoje, aplicativos acessíveis em smartphones permitem que qualquer usuário com conexões mal-intencionadas crie narrativas falsas altamente destrutivas para reputações pessoais ou de segurança pública.</p>
+
+            <div class="grid-midia">
+                <div class="media-placeholder">
+                    <h3>Análise de Biometria Facial</h3>
+                    <p>Padrões de inconsistência em texturas de pele e taxas de piscada de olhos revelam manipulação algorítmica.</p>
+                    <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=500&q=80" alt="Análise de IA em rosto" class="midia-imagem">
+                </div>
+                <div class="media-placeholder">
+                    <h3>Como Funcionam as Deepfakes</h3>
+                    <p>Entenda a tecnologia de redes adversárias generativas (GANs) responsáveis pela troca de identidades em vídeos.</p>
+                    <div class="video-box">
+                        <iframe src="https://www.youtube.com/embed/g6H1Zz_l2wE" title="Explicação Deepfakes" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <h4>📝 Desafio Rápido: Qual tecnologia base serve para o desenvolvimento de mídias do tipo deepfake?</h4>
+                <div class="quiz-opcoes">
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'deep-feedback')">A) Filtros simples de edição de imagem baseados em matrizes 2D.</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, true, 'deep-feedback')">B) Redes Neurais Artificiais e algoritmos de Aprendizado Profundo (Deep Learning).</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'deep-feedback')">C) Apenas gravações comuns de estúdio com atores dubladores.</div>
+                </div>
+                <div id="deep-feedback" class="quiz-feedback"></div>
+            </div>
+        </div>
+
+        <div id="desinformacao" class="page-content">
+            <h2>Desinformação Automatizada</h2>
+            <p class="introducao-aba">Disparos coordenados por robôs e alimentados por geradores de texto em larga escala ameaçam a estabilidade de ecossistemas democráticos.</p>
+            
+            <p>A velocidade da mentira na era digital supera a capacidade de checagem humana tradicional. Com a IA generativa, agentes maliciosos conseguem criar milhares de artigos falsos, posts e comentários persuasivos personalizados em segundos, inundando as redes sociais para forjar falsos consensos sobre temas cruciais, como saúde coletiva e eleições.</p>
+            
+            <p>Os algoritmos de engajamento das grandes plataformas digitais muitas vezes priorizam o conteúdo hiperbólico ou revoltante (características comuns da desinformação) porque isso mantém o internauta conectado por mais tempo, maximizando o lucro publicitário em detrimento da verdade factual.</p>
+
+            <div class="grid-midia">
+                <div class="media-placeholder">
+                    <h3>Fábricas de Bots</h3>
+                    <p>Visualização esquemática de redes integradas que automatizam perfis falsos com textos persuasivos em plataformas.</p>
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt="Conexões de redes digitais fictícias" class="midia-imagem">
+                </div>
+                <div class="media-placeholder">
+                    <h3>O Algoritmo e a Desinformação</h3>
+                    <p>Assista à explicação sociológica sobre como as câmaras de eco aprisionam os usuários em bolhas ideológicas.</p>
+                    <div class="video-box">
+                        <iframe src="https://www.youtube.com/embed/5F_Pia7VnI4" title="Bolhas Digitais" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <h4>📝 Desafio Rápido: O que incentiva a rápida disseminação de notícias falsas nos algoritmos de redes sociais?</h4>
+                <div class="quiz-opcoes">
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'desinf-feedback')">A) O rigoroso sistema de validação de fontes implementado pelas plataformas.</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, true, 'desinf-feedback')">B) O alto engajamento emocional provocado por manchetes alarmistas ou falsas.</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'desinf-feedback')">C) A falta de interesse do público geral em ler postagens e interagir na internet.</div>
+                </div>
+                <div id="desinf-feedback" class="quiz-feedback"></div>
+            </div>
+        </div>
+
+        <div id="combate" class="page-content">
+            <h2>Ciência de Dados no Combate à Fraude</h2>
+            <p class="introducao-aba">O avanço científico em modelos analíticos e a conscientização cidadã são os pilares fundamentais da segurança digital contemporânea.</p>
+            
+            <p>A mesma Inteligência Artificial usada para enganar pode atuar na blindagem social. Centros de engenharia computacional desenvolvem detectores capazes de encontrar variações microscópicas de iluminação, espectros sonoros artificiais e anomalias de sintaxe textual para rotular mídias possivelmente forjadas.</p>
+
+            <div class="artigo-card">
+                <p class="citacao">"Sistemas automatizados de monitoramento de redes conseguiram prever picos de desinformação com 89% de acurácia ao analisar metadados de compartilhamento anômalo nas primeiras fases de viralização."</p>
+                <span class="fonte-artigo">Source: Instituto Global de Segurança Cibernética (2025)</span>
+            </div>
+
+            <div class="artigo-card">
+                <p class="citacao">"Programas escolares focados em Letramento Digital reduziram a propensão de compartilhamento de fake news entre adolescentes de Ensino Médio em até 65%, fortalecendo o pensamento crítico."</p>
+                <span class="fonte-artigo">Source: Revista de Educação e Tecnologia Cidadã (2026)</span>
+            </div>
+
+            <div class="quiz-container">
+                <h4>📝 Desafio Rápido: De acordo com a pesquisa de Letramento Digital, qual foi a redução de compartilhamento de fake news em estudantes?</h4>
+                <div class="quiz-opcoes">
+                    <div class="quiz-opcao" onclick="verificarResposta(this, true, 'combate-feedback')">A) Redução de até 65%, consolidando o valor pedagógico do pensamento crítico.</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'combate-feedback')">B) Não houve nenhuma mudança significativa no comportamento estatístico dos alunos.</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'combate-feedback')">C) Houve um aumento descontrolado devido ao maior uso de computadores nas escolas.</div>
+                </div>
+                <div id="combate-feedback" class="quiz-feedback"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <section class="ia-section" style="max-width: 1000px; margin: 0 auto 3rem auto;">
+        <div class="ia-header">
+            <div class="ia-avatar">IA</div>
+            <div>
+                <h3 style="margin: 0; font-size: 1.2rem;">CyberBot Cidadão</h3>
+                <span style="font-size: 0.85rem; color: var(--azul-neon);">● Monitor de Fatos Ativo</span>
+            </div>
+        </div>
+        <div class="ia-chat-box">
+            <p id="ia-texto" style="margin: 0; color: var(--texto-claro);">Olá! Sou o assistente de proteção digital. Clique no botão abaixo para que eu filtre dados reais sobre o impacto da Inteligência Artificial e deepfakes em nosso ecossistema social!</p>
+        </div>
+        <button class="ia-btn" onclick="gerarCuriosidade()">Analisar Fato da IA</button>
+    </section>
+
+    <script>
+        function mudarPagina(idPagina) {
+            const paginas = document.querySelectorAll('.page-content');
+            paginas.forEach(p => p.classList.remove('active'));
+
+            const botoes = document.querySelectorAll('.nav-btn');
+            botoes.forEach(b => b.classList.remove('active'));
+
+            document.getElementById(idPagina).classList.add('active');
+
+            const botaoAtivo = Array.from(botoes).find(b => b.getAttribute('onclick').includes(idPagina));
+            if (botaoAtivo) botaoAtivo.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const curiosidades = [
+            "Fato Analítico: Cerca de 96% dos vídeos do tipo deepfake identificados na internet no início de sua popularização eram voltados para a quebra de privacidade e difamação de mulheres de forma cruel.",
+            "Desafio Técnico: Os detectores forenses de IA buscam por falhas na geração de reflexos oculares e nas bordas de sombras ao redor do nariz e pescoço para expor manipulações faciais.",
+            "Legislação Global: Diversos países já debatem leis criminais específicas para penalizar civilmente criadores de clonagem de voz não autorizadas e desinformações eleitorais via IA.",
+            "Segurança de Dados: Desconfie de vídeos urgentes e com apelo emocional extremo em que celebridades ou políticos indicam produtos gratuitos ou investimentos milagrosos. Quase sempre são golpes sintetizados.",
+            "Dica de Cidadania: Na dúvida se uma notícia é real, nunca compartilhe. Faça uma busca reversa da imagem ou procure os termos textuais em agências consolidadas de checagem de fatos."
+        ];
+
+        function gerarCuriosidade() {
+            const caixaTexto = document.getElementById('ia-texto');
+            caixaTexto.style.opacity = '0.5';
+            caixaTexto.innerText = "Consultando base forense de dados cibernéticos...";
+
+            setTimeout(() => {
+                const indiceAleatorio = Math.floor(Math.random() * curiosidades.length);
+                caixaTexto.innerText = curiosidades[indiceAleatorio];
+                caixaTexto.style.opacity = '1';
+            }, 700);
+        }
+
+        function verificarResposta(elemento, eCorreta, feedbackId) {
+            const feedbackBox = document.getElementById(feedbackId);
+            feedbackBox.style.display = "block";
+            
+            const opcoes = elemento.parentElement.querySelectorAll('.quiz-opcao');
+            opces.forEach(op => {
+                op.style.borderColor = 'var(--cinza-linha)';
+                op.style.background = 'var(--bg-card)';
+            });
+
+            if(eCorreta) {
+                elemento.style.borderColor = '#00e676';
+                elemento.style.background = 'rgba(0, 230, 118, 0.1)';
+                feedbackBox.style.color = '#00e676';
+                feedbackBox.innerText = "✨ Resposta Correta! Você demonstra excelente letramento digital e discernimento analítico.";
+            } else {
+                elemento.style.borderColor = var(--vermelho-alerta);
+                elemento.style.background = 'rgba(255, 42, 95, 0.1)';
+                feedbackBox.style.color = var(--vermelho-alerta);
+                feedbackBox.innerText = "❌ Resposta incorreta. Cuidado com as armadilhas digitais! Releia os dados textuais da aba e tente novamente.";
+            }
+        }
+    </script>
+</body>
+</html>
