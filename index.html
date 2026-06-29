@@ -33,7 +33,6 @@
             line-height: 1.8;
             overflow-x: hidden;
             font-size: 1.15rem;
-        } stream;
         }
 
         /* --- MENU SUPERIOR --- */
@@ -63,6 +62,7 @@
         nav {
             display: flex;
             gap: 1rem;
+            margin-left: auto; /* Garante que os botões fiquem totalmente à direita */
         }
 
         .nav-btn {
@@ -139,7 +139,7 @@
             margin-bottom: 2.5rem;
         }
 
-        /* --- NOVO DESTAQUE: INFORMAÇÃO IMPORTANTE --- */
+        /* --- INFORMAÇÃO DESTAQUE --- */
         .info-destaque-box {
             background: rgba(255, 42, 95, 0.03);
             border: 1px solid rgba(255, 42, 95, 0.3);
@@ -160,6 +160,7 @@
 
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 1rem; text-align: center; }
+            nav { margin-left: 0; }
             h2 { font-size: 2rem; }
             main { margin-top: 160px; }
         }
