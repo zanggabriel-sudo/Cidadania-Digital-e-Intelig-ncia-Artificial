@@ -429,7 +429,7 @@
                 <div class="quiz-opcoes">
                     <div class="quiz-opcao" onclick="verificarResposta(this, true, 'combate-feedback')">A) Redução de até 65%, consolidando o valor pedagógico do pensamento crítico.</div>
                     <div class="quiz-opcao" onclick="verificarResposta(this, false, 'combate-feedback')">B) Não houve nenhuma mudança significativa no comportamento estatístico dos alunos.</div>
-                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'combate-feedback')">C) Houve um aumento descontrolado devido ao maior uso de computadores nas escolas.</div>
+                    <div class="quiz-opcao" onclick="forificarResposta(this, false, 'combate-feedback')">C) Houve um aumento descontrolado devido ao maior uso de computadores nas escolas.</div>
                 </div>
                 <div id="combate-feedback" class="quiz-feedback"></div>
             </div>
@@ -492,7 +492,7 @@
             feedbackBox.style.display = "block";
             
             const opcoes = elemento.parentElement.querySelectorAll('.quiz-opcao');
-            opces.forEach(op => {
+            opcoes.forEach(op => {
                 op.style.borderColor = 'var(--cinza-linha)';
                 op.style.background = 'var(--bg-card)';
             });
@@ -503,9 +503,9 @@
                 feedbackBox.style.color = '#00e676';
                 feedbackBox.innerText = "✨ Resposta Correta! Você demonstra excelente letramento digital e discernimento analítico.";
             } else {
-                elemento.style.borderColor = var(--vermelho-alerta);
+                elemento.style.borderColor = 'var(--vermelho-alerta)';
                 elemento.style.background = 'rgba(255, 42, 95, 0.1)';
-                feedbackBox.style.color = var(--vermelho-alerta);
+                feedbackBox.style.color = 'var(--vermelho-alerta)';
                 feedbackBox.innerText = "❌ Resposta incorreta. Cuidado com as armadilhas digitais! Releia os dados textuais da aba e tente novamente.";
             }
         }
