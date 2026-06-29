@@ -33,6 +33,7 @@
             line-height: 1.8;
             overflow-x: hidden;
             font-size: 1.15rem;
+        } stream;
         }
 
         /* --- MENU SUPERIOR --- */
@@ -138,63 +139,29 @@
             margin-bottom: 2.5rem;
         }
 
-        /* --- ESTILIZAÇÃO DOS ELEMENTOS INTERNOS --- */
-        .grid-midia {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
+        /* --- NOVO DESTAQUE: INFORMAÇÃO IMPORTANTE --- */
+        .info-destaque-box {
+            background: rgba(255, 42, 95, 0.03);
+            border: 1px solid rgba(255, 42, 95, 0.3);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 2.5rem;
             margin-bottom: 3rem;
+            box-shadow: inset 0 0 20px rgba(255, 42, 95, 0.05);
+        }
+
+        .info-destaque-box h3 {
+            color: var(--vermelho-alerta);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         @media (max-width: 768px) {
-            .grid-midia { grid-template-columns: 1fr; }
             header { flex-direction: column; gap: 1rem; text-align: center; }
             h2 { font-size: 2rem; }
             main { margin-top: 160px; }
-        }
-
-        .media-placeholder {
-            background: var(--bg-card);
-            border: 1px solid var(--cinza-linha);
-            border-radius: 16px;
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            min-height: 320px;
-        }
-
-        .video-box {
-            width: 100%;
-            height: 220px;
-            background: #060a12;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px dashed var(--azul-neon);
-            margin-top: 1.5rem;
-            color: var(--azul-neon);
-            font-size: 1.1rem;
-            overflow: hidden;
-        }
-
-        .midia-imagem {
-            width: 100%;
-            max-height: 240px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            background: #060a12;
-        }
-
-        .video-box iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
 
         .artigo-card {
@@ -348,19 +315,9 @@
             
             <p>Esse fenômeno gera profundas crises éticas e democráticas. A manipulação visual não é mais um privilégio de estúdios de cinema de Hollywood; hoje, aplicativos acessíveis em smartphones permitem que qualquer usuário com conexões mal-intencionadas crie narrativas falsas altamente destrutivas para reputações pessoais ou de segurança pública.</p>
 
-            <div class="grid-midia">
-                <div class="media-placeholder">
-                    <h3>Análise de Biometria Facial</h3>
-                    <p>Padrões de inconsistência em texturas de pele e taxas de piscada de olhos revelam manipulação algorítmica.</p>
-                    <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=500&q=80" alt="Análise de IA em rosto" class="midia-imagem">
-                </div>
-                <div class="media-placeholder">
-                    <h3>Como Funcionam as Deepfakes</h3>
-                    <p>Entenda a tecnologia de redes adversárias generativas (GANs) responsáveis pela troca de identidades em vídeos.</p>
-                    <div class="video-box">
-                        <iframe src="https://www.youtube.com/embed/g6H1Zz_l2wE" title="Explicação Deepfakes" allowfullscreen></iframe>
-                    </div>
-                </div>
+            <div class="info-destaque-box">
+                <h3>⚠️ Alerta Forense Importante</h3>
+                <p style="margin: 1rem 0 0 0;">Modelos generativos de vídeo têm grandes dificuldades em manter a consistência física em detalhes biométricos involuntários. Fique atento ao reflexo desalinhado da luz nas pupilas dos olhos, à falta de sincronia exata entre os movimentos dos dentes e a fala, ou à ausência de piscadas naturais. Esses são os primeiros indícios de uma manipulação digital maliciosa.</p>
             </div>
 
             <div class="quiz-container">
@@ -382,19 +339,9 @@
             
             <p>Os algoritmos de engajamento das grandes plataformas digitais muitas vezes priorizam o conteúdo hiperbólico ou revoltante (características comuns da desinformação) porque isso mantém o internauta conectado por mais tempo, maximizando o lucro publicitário em detrimento da verdade factual.</p>
 
-            <div class="grid-midia">
-                <div class="media-placeholder">
-                    <h3>Fábricas de Bots</h3>
-                    <p>Visualização esquemática de redes integradas que automatizam perfis falsos com textos persuasivos em plataformas.</p>
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt="Conexões de redes digitais fictícias" class="midia-imagem">
-                </div>
-                <div class="media-placeholder">
-                    <h3>O Algoritmo e a Desinformação</h3>
-                    <p>Assista à explicação sociológica sobre como as câmaras de eco aprisionam os usuários em bolhas ideológicas.</p>
-                    <div class="video-box">
-                        <iframe src="https://www.youtube.com/embed/5F_Pia7VnI4" title="Bolhas Digitais" allowfullscreen></iframe>
-                    </div>
-                </div>
+            <div class="info-destaque-box">
+                <h3>⚠️ Dinâmica das Redes Sociais</h3>
+                <p style="margin: 1rem 0 0 0;">O perigo dos conteúdos automatizados reside em sua capacidade de inflar artificialmente o debate público. Um grupo reduzido de contas falsas (bots) alimentadas por modelos de linguagem consegue simular milhares de interações, forçando algoritmos de recomendação a destacar tópicos enganosos nas seções de "Assuntos do Momento", enganando a percepção social real.</p>
             </div>
 
             <div class="quiz-container">
@@ -424,12 +371,17 @@
                 <span class="fonte-artigo">Source: Revista de Educação e Tecnologia Cidadã (2026)</span>
             </div>
 
+            <div class="info-destaque-box">
+                <h3>⚠️ Protocolo de Responsabilidade Coletiva</h3>
+                <p style="margin: 1rem 0 0 0;">Antes de compartilhar qualquer informação urgente em ambientes virtuais, pratique a checagem tripla: valide se a notícia consta em veículos jornalísticos de confiança, confirme se o autor do post possui credibilidade no assunto e verifique se o material não apela para gatilhos emocionais drásticos que nublam a racionalidade lógica.</p>
+            </div>
+
             <div class="quiz-container">
                 <h4>📝 Desafio Rápido: De acordo com a pesquisa de Letramento Digital, qual foi a redução de compartilhamento de fake news em estudantes?</h4>
                 <div class="quiz-opcoes">
                     <div class="quiz-opcao" onclick="verificarResposta(this, true, 'combate-feedback')">A) Redução de até 65%, consolidando o valor pedagógico do pensamento crítico.</div>
                     <div class="quiz-opcao" onclick="verificarResposta(this, false, 'combate-feedback')">B) Não houve nenhuma mudança significativa no comportamento estatístico dos alunos.</div>
-                    <div class="quiz-opcao" onclick="forificarResposta(this, false, 'combate-feedback')">C) Houve um aumento descontrolado devido ao maior uso de computadores nas escolas.</div>
+                    <div class="quiz-opcao" onclick="verificarResposta(this, false, 'combate-feedback')">C) Houve um aumento descontrolado devido ao maior uso de computadores nas escolas.</div>
                 </div>
                 <div id="combate-feedback" class="quiz-feedback"></div>
             </div>
